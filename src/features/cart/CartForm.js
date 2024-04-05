@@ -34,10 +34,7 @@ function CartForm() {
             items: items.map(item => ({ id: item.id, price: item.priceSum, count: item.amount }))
         }
         setFormError(false);
-        isAgreed && dispatch(postCartOrder(obj)).then(setForm(({
-            phone: '',
-            address: '',
-        })));
+        isAgreed && dispatch(postCartOrder(obj));
     }
 
     return (
