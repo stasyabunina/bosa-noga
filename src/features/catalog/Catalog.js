@@ -30,7 +30,7 @@ function Catalog({ isSearch }) {
         <section className='catalog'>
             <h2 className='text-center'>Каталог</h2>
             {isSearch && <SearchForm />}
-            {isLoading ? <span className='text-center'>Loading...</span> : error ? <span>{error}</span> : <CatalogToolbar categories={categories} />}
+            {isLoading && categories.length === 1 ? <span className='text-center'>Loading...</span> : error && categories.length === 1 ? <span>{error}</span> : <CatalogToolbar categories={categories} />}
             {isLoading ? <Preloader /> : error ? <span>{error}</span> : items.length !== 0 ? <ProductList items={items} /> : <></>}
             {moreLoading ? <Preloader /> : moreError ? <span>{moreError}</span> : isSearch && search.trim() !== '' && items.length === 0 ? <div className='w-100 text-center pb-5 pt-5'><span className='d-block'>Ничего не найдено.</span></div> : (typeof loadedItemsLength == 'number' && loadedItemsLength < 6) || items.length < 6 ? <></>
                 : <div className='text-center'>
