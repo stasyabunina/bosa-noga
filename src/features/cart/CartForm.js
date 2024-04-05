@@ -22,10 +22,16 @@ function CartForm() {
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        if (isAgreed === false) {
+            return;
+        }
+
         if (form.phone.trim() === '' || form.address.trim() === '') {
             setFormError(true);
             return;
         }
+
         const obj = {
             owner: {
                 phone: form.phone,
