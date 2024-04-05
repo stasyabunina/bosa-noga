@@ -1,4 +1,4 @@
-import TopSales from '../features/homePage/sales/TopSales';
+import TopSales from '../features/sales/TopSales';
 import Catalog from '../features/catalog/Catalog';
 
 function HomePage() {

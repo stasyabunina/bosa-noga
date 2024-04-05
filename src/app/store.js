@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import salesSlice from '../features/homePage/sales/salesSlice';
+import salesSlice from '../features/sales/salesSlice';
 import catalogSlice from '../features/catalog/catalogSlice';
 import categoriesSlice from '../features/categories/categoriesSlice';
 import cartSlice from '../features/cart/cartSlice';

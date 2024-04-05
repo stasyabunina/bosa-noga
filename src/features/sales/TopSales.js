@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSales } from './getSales';
-import Preloader from '../../../components/Preloader'
-import ProductList from '../../../components/homePage/ProductList'
+import Preloader from '../../components/Preloader';
+import ProductList from '../../components/homePage/ProductList';
 
 function TopSales() {
     const dispatch = useDispatch();
