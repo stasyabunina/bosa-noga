@@ -15,7 +15,7 @@ function CartPage() {
 
     useEffect(() => {
         const cart = JSON.parse(localStorage.getItem('cart'));
-        if (cart && items !== cart.items) {
+        if (cart && items.length === 0) {
             dispatch(loadCart(cart));
         }
     }, []);
