@@ -27,19 +27,17 @@ function CartPage() {
                 localStorage.removeItem('cart');
             } else {
                 localStorage.setItem('cart', JSON.stringify({ items: items, itemsAmount: itemsAmount, priceSum: priceSum }));
-            }  
+            }
         }
     }, [didRender, items]);
 
     useEffect(() => {
-        if (didRender && success === true) {
-            setTimeout(() => {
-                dispatch(resetCart());
-                localStorage.removeItem('cart');
-                navigate('/');
-            }, 3000)
-        }
-    }, [didRender, success]);
+        success === true && setTimeout(() => {
+            dispatch(resetCart());
+            localStorage.removeItem('cart');
+            navigate('/');
+        }, 3000)
+    }, [success]);
 
     return (
         <>
