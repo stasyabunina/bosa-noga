@@ -28,11 +28,6 @@ const cartSlice = createSlice({
         resetCart: (_state, _action) => {
             return { ...initialState };
         },
-        loadCart: (_state, action) => {
-            const cart = action.payload;
-            return { ...initialState, items: cart.items, itemsAmount: cart.itemsAmount };
-
-        }
     },
     extraReducers: (builder) => {
         builder

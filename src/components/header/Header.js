@@ -5,7 +5,6 @@ import './Header.css';
 import logo from '../../img/header-logo.png';
 import CartIcon from './CartIcon';
 import { updateSearchValue } from '../../features/catalog/catalogSlice';
-import { loadCart } from '../../features/cart/cartSlice';
 import config from '../../app/config';
 
 function Header() {
@@ -14,14 +13,6 @@ function Header() {
   const inputRef = useRef(null);
   const [isSearchOpened, setIsSearchOpened] = useState(false);
   const { search } = useSelector(state => state.catalog);
-  const { items } = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart) {
-      items !== cart.items && dispatch(loadCart(cart));
-    }
-  }, []); 
 
   const onSubmit = (e) => {
     e.preventDefault();
