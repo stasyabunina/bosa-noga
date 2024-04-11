@@ -6,12 +6,14 @@ import CartForm from '../features/cart/CartForm';
 import Preloader from '../components/Preloader';
 import { loadCart, resetCart } from '../features/cart/cartSlice';
 import useDidMountEffect from '../app/hooks';
+import { totalPriceSum } from '../features/cart/selectors';
 
 function CartPage() {
     const dispatch = useDispatch();
     const didRender = useDidMountEffect();
     const navigate = useNavigate();
-    const { items, itemsAmount, priceSum, isLoading, error, success } = useSelector((state) => state.cart);
+    const { items, itemsAmount, isLoading, error, success } = useSelector((state) => state.cart);
+    const total = useSelector(totalPriceSum);
 
     useEffect(() => {
         const cart = JSON.parse(localStorage.getItem('cart'));
@@ -26,7 +28,7 @@ function CartPage() {
             if (items.length === 0) {
                 localStorage.removeItem('cart');
             } else {
-                localStorage.setItem('cart', JSON.stringify({ items: items, itemsAmount: itemsAmount, priceSum: priceSum }));
+                localStorage.setItem('cart', JSON.stringify({ items: items, itemsAmount: itemsAmount, priceSum: total }));
             }
         }
     }, [didRender, items]);
