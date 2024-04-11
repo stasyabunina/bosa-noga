@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeItem } from './cartSlice';
 
 function CartItem({ item, index }) {
     const dispatch = useDispatch();
 
     const onClick = () => {
-        dispatch(removeItem({ id: item.id, priceSum: item.priceSum }))
+        dispatch(removeItem(item.id))
     }
 
     return (

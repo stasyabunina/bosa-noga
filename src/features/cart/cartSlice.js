@@ -4,7 +4,6 @@ import { postCartOrder } from './postCartOrder';
 const initialState = {
     items: [],
     itemsAmount: 0,
-    priceSum: 0,
     isLoading: false,
     error: null,
     success: false,
@@ -16,23 +15,23 @@ const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const item = action.payload;
-            return { ...state, items: [...state.items, item], itemsAmount: state.itemsAmount + 1, priceSum: state.priceSum + item.priceSum };
+            return { ...state, items: [...state.items, item], itemsAmount: state.itemsAmount + 1 };
         },
         updateItem: (state, action) => {
             const item = action.payload;
-            state.priceSum += item.priceSum;
             state.items.map(o => o.id === item.id && o.size === item.size ? { ...o, amount: o.amount += item.amount, priceSum: o.priceSum += item.priceSum } : item);
         },
         removeItem: (state, action) => {
-            const { id, priceSum } = action.payload;
-            return { ...state, items: state.items.filter(item => item.id !== id), priceSum: state.priceSum - priceSum, itemsAmount: state.itemsAmount - 1 }
+            const id = action.payload;
+            return { ...state, items: state.items.filter(item => item.id !== id), itemsAmount: state.itemsAmount - 1 }
         },
         resetCart: (_state, _action) => {
             return { ...initialState };
         },
         loadCart: (_state, action) => {
             const cart = action.payload;
-            return { ...initialState, items: cart.items, itemsAmount: cart.itemsAmount, priceSum: cart.priceSum };
+            return { ...initialState, items: cart.items, itemsAmount: cart.itemsAmount };
+
         }
     },
     extraReducers: (builder) => {

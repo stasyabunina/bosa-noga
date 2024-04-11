@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux';
 import CartItem from '../../features/cart/CartItem';
+import { totalPriceSum } from '../../features/cart/selectors';
 
 function CartList() {
-    const { items, priceSum } = useSelector((state) => state.cart);
+    const { items } = useSelector((state) => state.cart);
+    const total = useSelector(totalPriceSum);
 
     return (
         <section className='cart'>
@@ -25,7 +27,7 @@ function CartList() {
                     ))}
                     <tr>
                         <td colSpan='5' className='text-end'>Общая стоимость</td>
-                        <td>{priceSum} руб.</td>
+                        <td>{total} руб.</td>
                     </tr>
                 </tbody>
             </table>
