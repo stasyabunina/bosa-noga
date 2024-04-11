@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Col } from 'react-bootstrap';
+import config from '../../app/config';
 
 function SalesItem({ item }) {
     return (
@@ -9,7 +10,7 @@ function SalesItem({ item }) {
                 <div className='card-body'>
                     <p className='card-text'>{item.title}</p>
                     <p className='card-text'>{item.price}</p>
-                    <Link to={`${process.env.REACT_APP_CATALOG_PATH}/${item.id}`} className='btn btn-outline-primary'>Заказать</Link>
+                    <Link to={`${config.catalogUrl}/${item.id}`} className='btn btn-outline-primary'>Заказать</Link>
                 </div>
             </div>
         </Col>

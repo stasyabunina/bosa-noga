@@ -23,11 +23,6 @@ function ProductPage() {
         }
     }, [didRender, items]);
 
-    // useEffect(() => {
-    //     didRender && console.log('hi')
-    //     // navigate(process.env.REACT_APP_CART_PATH);
-    // }, [didRender, items]);
-
     return (
         <section className='catalog-item'>
             {isLoading ? <Preloader /> : error ? <span>{error}</span> : item ? <Product item={item} /> : <></>}

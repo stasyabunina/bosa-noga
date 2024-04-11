@@ -1,5 +1,6 @@
 import './Footer.css';
 import { NavLink, Link } from 'react-router-dom';
+import config from '../../app/config';
 
 function Footer() {
     return (
@@ -9,9 +10,9 @@ function Footer() {
                     <section>
                         <h5>Информация</h5>
                         <ul className='nav flex-column'>
-                            <li className='nav-item'><NavLink to={process.env.REACT_APP_ABOUT_PATH} className='nav-link'>О магазине</NavLink></li>
-                            <li className='nav-item'><NavLink to={process.env.REACT_APP_CATALOG_PATH} className='nav-link'>Каталог</NavLink></li>
-                            <li className='nav-item'><NavLink to={process.env.REACT_APP_CONTACTS_PATH} className='nav-link'>Контакты</NavLink></li>
+                            <li className='nav-item'><NavLink to={config.aboutUrl} className='nav-link'>О магазине</NavLink></li>
+                            <li className='nav-item'><NavLink to={config.catalogUrl} className='nav-link'>Каталог</NavLink></li>
+                            <li className='nav-item'><NavLink to={config.contactsUrl} className='nav-link'>Контакты</NavLink></li>
                         </ul>
                     </section>
                 </div>

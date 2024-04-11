@@ -2,14 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getCategories } from '../categories/getCategories';
 
 const initialState = {
-    categories: [{
-        id: 11,
-        title: 'Все'
-    }],
-    selectedCategory: {
-        id: 11,
-        title: 'Все'
-    },
+    categories: [],
+    selectedCategory: null,
     isLoading: false,
     error: null
 };
@@ -19,7 +13,8 @@ const categoriesSlice = createSlice({
     initialState,
     reducers: {
         updateCategory: (state, action) => {
-            const selectedCategory = state.categories.find(o => o.id === action.payload);
+            const id = action.payload;
+            const selectedCategory = id ? state.categories.find(o => o.id === id) : null;
             return { ...state, selectedCategory };
         },
     },
@@ -27,19 +22,13 @@ const categoriesSlice = createSlice({
         builder
             .addCase(getCategories.pending, (state) => {
                 return {
-                    ...state, categories: [{
-                        id: 11,
-                        title: 'Все'
-                    }], isLoading: true, error: null
+                    ...state, categories: [], isLoading: true, error: null
                 };
             })
             .addCase(getCategories.fulfilled, (state, action) => {
                 const categories = action.payload;
                 return {
-                    ...state, categories: [{
-                        id: 11,
-                        title: 'Все'
-                    }, ...categories], isLoading: false,
+                    ...state, categories: categories, isLoading: false,
                 };
             })
             .addCase(getCategories.rejected, (state, action) => {

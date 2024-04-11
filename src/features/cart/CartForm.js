@@ -32,7 +32,7 @@ function CartForm() {
             return;
         }
 
-        const obj = {
+        const orderData = {
             owner: {
                 phone: form.phone,
                 address: form.address,
@@ -40,8 +40,11 @@ function CartForm() {
             items: items.map(item => ({ id: item.id, price: item.priceSum, count: item.amount }))
         }
         setFormError(false);
-        isAgreed && dispatch(postCartOrder(obj));
+        isAgreed && dispatch(postCartOrder(orderData));
     }
+
+    const hasPhoneError = form.phone.trim() === '' && formError;
+    const hasAddressError = form.address.trim() === '' && formError;
 
     return (
         <section className='order'>
@@ -49,12 +52,12 @@ function CartForm() {
             <div className='card' style={{ maxWidth: '30rem', margin: '0 auto' }}>
                 <form className='card-body' onSubmit={onSubmit}>
                     <div className='form-group'>
-                        {form.phone.trim() === '' && formError ? <div className='pb-2 pt-2'><span className='text-danger'>Поле не может быть пустым</span></div> : <></>}
+                        {hasPhoneError ? <div className='pb-2 pt-2'><span className='text-danger'>Поле не может быть пустым</span></div> : <></>}
                         <label htmlFor='phone'>Телефон</label>
                         <input id='phone' className='form-control' name='phone' placeholder='Ваш телефон' value={form.phone} onChange={onValueChange} />
                     </div>
                     <div className='form-group'>
-                        {form.address.trim() === '' && formError ? <div className='pb-2 pt-2'><span className='text-danger'>Поле не может быть пустым</span></div> : <></>}
+                        {hasAddressError ? <div className='pb-2 pt-2'><span className='text-danger'>Поле не может быть пустым</span></div> : <></>}
                         <label htmlFor='address'>Адрес доставки</label>
                         <input id='address' className='form-control' name='address' placeholder='Адрес доставки' value={form.address} onChange={onValueChange} />
                     </div>

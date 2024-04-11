@@ -6,6 +6,7 @@ import logo from '../../img/header-logo.png';
 import CartIcon from './CartIcon';
 import { updateSearchValue } from '../../features/catalog/catalogSlice';
 import { loadCart } from '../../features/cart/cartSlice';
+import config from '../../app/config';
 
 function Header() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function Header() {
     if (search.trim() === '') {
       setIsSearchOpened(!isSearchOpened);
     } else {
-      navigate(process.env.REACT_APP_CATALOG_PATH);
+      navigate(config.catalogUrl);
       setIsSearchOpened(!isSearchOpened);
       return;
     }
@@ -52,13 +53,13 @@ function Header() {
                   <NavLink className='nav-link' to='/'>Главная</NavLink>
                 </li>
                 <li className='nav-item'>
-                  <NavLink className='nav-link' to={process.env.REACT_APP_CATALOG_PATH}>Каталог</NavLink>
+                  <NavLink className='nav-link' to={config.catalogUrl}>Каталог</NavLink>
                 </li>
                 <li className='nav-item'>
-                  <NavLink className='nav-link' to={process.env.REACT_APP_ABOUT_PATH}>О магазине</NavLink>
+                  <NavLink className='nav-link' to={config.aboutUrl}>О магазине</NavLink>
                 </li>
                 <li className='nav-item'>
-                  <NavLink className='nav-link' to={process.env.REACT_APP_CONTACTS_PATH}>Контакты</NavLink>
+                  <NavLink className='nav-link' to={config.contactsUrl}>Контакты</NavLink>
                 </li>
               </ul>
               <div>

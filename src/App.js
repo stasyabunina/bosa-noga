@@ -10,6 +10,7 @@ import ProductPage from './pages/ProductPage';
 import CatalogPage from './pages/CatalogPage';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+import config from './app/config';
 
 function App() {
   return (
@@ -21,11 +22,11 @@ function App() {
             <Banner />
             <Routes>
               <Route path='/' exact element={<HomePage />} />
-              <Route path={process.env.REACT_APP_ABOUT_PATH} element={<AboutPage />} />
-              <Route path={process.env.REACT_APP_CONTACTS_PATH} element={<ContactsPage />} />
-              <Route path={process.env.REACT_APP_CART_PATH} element={<CartPage />} />
-              <Route path={process.env.REACT_APP_PRODUCT_PATH} element={<ProductPage />} />
-              <Route path={process.env.REACT_APP_CATALOG_PATH} element={<CatalogPage />} />
+              <Route path={config.aboutUrl} element={<AboutPage />} />
+              <Route path={config.contactsUrl} element={<ContactsPage />} />
+              <Route path={config.cartUrl} element={<CartPage />} />
+              <Route path={config.productUrl} element={<ProductPage />} />
+              <Route path={config.catalogUrl} element={<CatalogPage />} />
               <Route path='*' element={< Page404 />} />
             </Routes>
           </div>

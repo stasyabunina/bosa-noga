@@ -1,14 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import config from '../../app/config';
 
 export const getCatalog = createAsyncThunk('catalog/getCatalog', async ({ id, value }) => {
-    let response;
+    const params = new URLSearchParams({
+        categoryId: id ?? '',
+        q: value ?? ''
+    });
 
-    if (id !== 11) {
-        response = await axios.get(`${process.env.REACT_APP_URL}${process.env.REACT_APP_ITEMS_REQ}?categoryId=${id}&offset=0${value ? `&q=${value}` : ''}`);
-    } else {
-        response = await axios.get(`${process.env.REACT_APP_URL}${process.env.REACT_APP_ITEMS_REQ}?offset=0${value ? `&q=${value}` : ''}`);
-    }
+    const url = new URL(`${config.baseUrl}${process.env.REACT_APP_ITEMS_REQ}?${params}`)
+
+    const response = await axios.get(url);
 
     return response.data;
 });

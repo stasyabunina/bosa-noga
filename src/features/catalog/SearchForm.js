@@ -7,9 +7,11 @@ function SearchForm() {
     const { search } = useSelector((state) => state.catalog);
     const { selectedCategory } = useSelector((state) => state.categories);
 
+    const category = !selectedCategory ? null : selectedCategory.id;
+
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(getCatalog({id: selectedCategory.id, value: search.trim().toLowerCase()}));
+        dispatch(getCatalog({id: category, value: search.trim().toLowerCase()}));
     }
 
     return (

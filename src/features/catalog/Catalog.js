@@ -18,12 +18,15 @@ function Catalog({ isSearch }) {
         dispatch(getCategories());
     }, []);
 
+    const hasSearchForm = search.trim() !== '' && isSearch;
+    const category = !selectedCategory ? null : selectedCategory.id;
+
     useEffect(() => {
-        search.trim() !== '' && isSearch ? dispatch(getCatalog({ id: selectedCategory.id, value: search.trim().toLowerCase() })) : dispatch(getCatalog({ id: selectedCategory.id }))
-    }, [selectedCategory.id]);
+        hasSearchForm ? dispatch(getCatalog({ id: category, value: search.trim().toLowerCase() })) : dispatch(getCatalog({ id: category }))
+    }, [selectedCategory]);
 
     const onClick = () => {
-        search.trim() !== '' && isSearch ? dispatch(loadItems({ id: selectedCategory.id, offset: items.length, value: search.trim().toLowerCase()})) : dispatch(loadItems({ id: selectedCategory.id, offset: items.length }));
+        hasSearchForm ? dispatch(loadItems({ id: category, offset: items.length, value: search.trim().toLowerCase()})) : dispatch(loadItems({ id: category, offset: items.length }));
     }
 
     return (
@@ -32,7 +35,7 @@ function Catalog({ isSearch }) {
             {isSearch && <SearchForm />}
             {isLoading && categories.length === 1 ? <span className='text-center'>Loading...</span> : error && categories.length === 1 ? <span>{error}</span> : <CatalogToolbar categories={categories} />}
             {isLoading ? <Preloader /> : error ? <span>{error}</span> : items.length !== 0 ? <ProductList items={items} /> : <></>}
-            {moreLoading ? <Preloader /> : moreError ? <span>{moreError}</span> : isSearch && search.trim() !== '' && items.length === 0 ? <div className='w-100 text-center pb-5 pt-5'><span className='d-block'>Ничего не найдено.</span></div> : (typeof loadedItemsLength == 'number' && loadedItemsLength < 6) || items.length < 6 ? <></>
+            {moreLoading ? <Preloader /> : moreError ? <span>{moreError}</span> : hasSearchForm && items.length === 0 ? <div className='w-100 text-center pb-5 pt-5'><span className='d-block'>Ничего не найдено.</span></div> : (typeof loadedItemsLength == 'number' && loadedItemsLength < 6) || items.length < 6 ? <></>
                 : <div className='text-center'>
                     <button type='button' className='btn btn-outline-primary' onClick={onClick}>Загрузить ещё</button>
                 </div>}

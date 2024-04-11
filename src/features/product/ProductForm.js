@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../cart/cartSlice';
 import { updateItem } from '../cart/cartSlice';
+import config from '../../app/config';
 
 function ProductForm({ item }) {
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function ProductForm({ item }) {
     }
 
     useEffect(() => {
-        isSubmmited && navigate(process.env.REACT_APP_CART_PATH);
+        isSubmmited && navigate(config.cartUrl);
     }, [isSubmmited]);
 
     return (
